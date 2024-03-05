@@ -171,6 +171,10 @@ class ProjectCoderApp(tk.Tk):
             self.start_stop_button.config(text="Start", style="Start.TButton")
             self.timer_start = None  # Reset timer start
             
+            # Reset the timer to 00:00:00
+            self.timer_display.config(text=str("00:00:00").split('.')[0])
+            self.update_timer()
+
         self.update_ui_texts()  # Ensure UI texts, including button labels, are updated based on current language
 
     def update_timer(self):
