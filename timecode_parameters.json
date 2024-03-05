@@ -1,0 +1,141 @@
+{
+  "tasks": {
+    "Print": {
+      "EN": "Print",
+      "FR": "Imprimer",
+      "Desc_EN": "Document Print",
+      "Desc_FR": "Impression des documents"
+    },
+    "Assembly": {
+      "EN": "Assembly",
+      "FR": "Assemblage",
+      "Desc_EN": "Fold, insert, seal",
+      "Desc_FR": "Plier, insérer, sceller"
+    },
+    "Mail": {
+      "EN": "Mail",
+      "FR": "Courrier",
+      "Desc_EN": "Induct mail into the postage stream.",
+      "Desc_FR": "Insérer le courrier dans le flux d'affranchissement."
+    },
+    "Reception": {
+      "EN": "Reception",
+      "FR": "Réception",
+      "Desc_EN": "Receipt of materials and prep for capture",
+      "Desc_FR": "Réception des matériaux et préparation pour la capture."
+    },
+    "Grooming": {
+      "EN": "Grooming",
+      "FR": "Préparation",
+      "Desc_EN": "Prepare documents for processing.",
+      "Desc_FR": "Préparer les documents pour le traitement."
+    },
+    "Capture": {
+      "EN": "Capture",
+      "FR": "Capture",
+      "Desc_EN": "Digitize or capture information from documents.",
+      "Desc_FR": "Numériser ou capturer les informations des documents."
+    },
+    "Edit": {
+      "EN": "Edit",
+      "FR": "Édition",
+      "Desc_EN": "Modify or correct captured information.",
+      "Desc_FR": "Modifier ou corriger les informations capturées."
+    },
+    "Coding": {
+      "EN": "Coding",
+      "FR": "Codage",
+      "Desc_EN": "Assign codes to data for categorization.",
+      "Desc_FR": "Attribuer des codes aux données pour la catégorisation."
+    },
+    "NRFU": {
+      "EN": "NRFU",
+      "FR": "NRFU",
+      "Desc_EN": "Non-Response Follow-Up.",
+      "Desc_FR": "Suivi des non-réponses."
+    },
+    "FEFU": {
+      "EN": "FEFU",
+      "FR": "FEFU",
+      "Desc_EN": "Field Enumeration Follow-Up.",
+      "Desc_FR": "Suivi de l'énumération sur le terrain."
+    },
+    "Training": {
+      "EN": "Training",
+      "FR": "Formation",
+      "Desc_EN": "Educate staff on procedures and tasks.",
+      "Desc_FR": "Former le personnel sur les procédures et les tâches."
+    },
+    "QC": {
+      "EN": "QC",
+      "FR": "CQ",
+      "Desc_EN": "Quality Control.",
+      "Desc_FR": "Contrôle de Qualité."
+    }
+  },
+  "projects": {
+    "STC": {
+      "EN": "Survey of Television Screens",
+      "FR": "Enquête sur les Écrans de Télévision",
+      "Code": 1001,
+      "identifier": "NUMID",
+      "Desc_EN": "Survey of television screens",
+      "Desc_FR": "Enquête sur les écrans des téléviseurs",
+      "tasks": ["Print", "Assembly", "Mail", "Reception", "Grooming", "Capture", "Edit", "Coding", "NRFU", "FEFU", "Training", "QC"]
+    },
+    "SGT": {
+      "EN": "Survey of Green Thumbs",
+      "FR": "Enquête sur les Pouces Verts",
+      "Code": 1002,
+      "identifier": "ID",
+      "Desc_EN": "Survey of green thumbs",
+      "Desc_FR": "Enquête sur les pouces verts",
+      "tasks": ["Print", "Assembly", "Mail", "Reception", "Grooming", "Capture", "Edit", "Coding", "NRFU", "FEFU", "Training", "QC"]
+    },
+    "SUF": {
+      "EN": "Survey of Unusual Foods",
+      "FR": "Enquête sur les Aliments Insolites",
+      "Code": 1003,
+      "identifier": "ID",
+      "Desc_EN": "Survey of Unusual Foods",
+      "Desc_FR": "Enquête sur les aliments insolites",
+      "tasks": ["Print", "Assembly", "Mail", "Reception", "Grooming", "Capture", "Edit", "Coding", "NRFU", "FEFU", "Training", "QC"]
+    },
+    "STS": {
+      "EN": "Survey of Television Screens",
+      "FR": "Enquête sur les Écrans de Télévision",
+      "Code": 1004,
+      "identifier": "ID",
+      "Desc_EN": "Survey of television screens",
+      "Desc_FR": "Enquête sur les écrans des téléviseurs",
+      "tasks": ["Print", "Assembly", "Mail", "Reception", "Grooming", "Capture", "Edit", "Coding", "NRFU", "FEFU", "Training", "QC"]
+    },
+    "SVS": {
+      "EN": "Survey of Vacant Stares",
+      "FR": "Enquête sur les Regards Vides",
+      "Code": 1005,
+      "identifier": "ID",
+      "Desc_EN": "Survey of vacant stares",
+      "Desc_FR": "Enquête sur les regards vides",
+      "tasks": ["Print", "Assembly", "Mail", "Reception", "Grooming", "Capture", "Edit", "Coding", "NRFU", "FEFU", "Training", "QC"]
+    },
+    "SAFT": {
+      "EN": "Survey of Apples Falling from Trees",
+      "FR": "Enquête sur les Pommes Tombant des Arbres",
+      "Code": 1006,
+      "identifier": "IDID",
+      "Desc_EN": "Survey of apples falling from trees",
+      "Desc_FR": "Enquête sur les pommes tombant des arbres",
+      "tasks": ["Print", "Assembly", "Mail", "Reception", "Grooming", "Capture", "Edit", "Coding", "NRFU", "FEFU", "Training", "QC"]
+    },
+    "SSAA": {
+      "EN": "Survey of Space Alien Abductions",
+      "FR": "Enquête sur les Enlèvements par des Extraterrestres",
+      "Code": 1007,
+      "identifier": "ID",
+      "Desc_EN": "Survey of space alien abductions",
+      "Desc_FR": "Enquête sur les enlèvements par des extraterrestres",
+      "tasks": ["Print", "Assembly", "Mail", "Reception", "Grooming", "Capture", "Edit", "Coding", "NRFU", "FEFU", "Training", "QC"]
+    }
+  }
+}

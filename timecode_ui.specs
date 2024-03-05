@@ -1,0 +1,421 @@
+#timecoder_ui.specs - Definitions used for input to chatgpt to define a GUI for task timecoding.
+
+1. OBJECTIVE
+1.1. Please write a script with a small user interface for my employees to record time billing for their projects.
+
+2. ADMINISTRATION
+  2.1 Rows in this file that begin with "#" should be ignored.
+  2.2 Include the following text as the first line of the file "# timecode_ui.py - User interface to allow users to record time against specific projects and activities. \n" 
+  2.3 Include a changelog comment block listing the changes made for each regeneration of the script
+  2.4 All numbered items are mandatory requirements
+  2.5 Track version numbers for this script.  Increment the version number each time this script is regenerated in the ChatGPT thread.   The base version number is 1.0
+  2.6 Comment the code liberally
+  2.7. Use generally accepted practices for python coding
+
+3.  USER INTERFACE
+  3.1 General Interface requirements
+    3.1.1 The title of the application is "Project Coder"
+    3.1.2 The GUI will be laid out horizontally.
+    3.1.3 The GUI window height and width should be sized the minimum size needed to fit all the elements.
+    3.1.4 GUI window is resizable
+    3.1.5 GUI should always be in the foreground
+    3.1.6 Reset GUI field data every time an output file is written.
+    3.1.7. Items in a dropdown list can be selected with a left-click.
+    3.1.8  Items in a dropdown list can be selected by typing the first character of the item.  In the case that there are multiple items starting with the same letter, pressing the same key again will select the next item with that letter.   
+
+  3.2 Bilingual requirement -  This interface will be bilingual, switchable between languages.
+    3.2.1  Languages Supported:  English (EN), French (FR)
+    3.2.2  A toggle button on the far right will toggle all labels and all dropdown list items to the chosen language.  Repeated toggling of the button will cycle through all the supported languages.
+    3.2.3 Translations are found in the appropriate dictionary  
+    3.2.4 Where a translation is not provided, attempt to make the translation and enclose it in "[]" so it can be identified and added to the dictionary later.
+    3.2.4 When the "EN/FR" toggle is on, display "EN".  Default this toggle on.  When the toggle is off, display "FR".
+    3.2.5 Display only one language at a time for each label or button element.
+    3.2.6 Language cannot be toggled when Start/Stop toggle is toggled on.
+    3.2.7 Clear the GUI input field when the EN/FR toggle is toggled.
+    3,2.8 If Desc_EN and Desc_FR exist for an input item, please generate a tooltip bubble to display when the mouse hovers over the entry. 
+    3.2.9. Any message box text must also be translated to the currently-selected language.
+
+  3.3. Accessibility Requirement - This interface will enable accessibility for people with persons with low visibility where possible.
+    3.3.1 Add (and label) keyboard shortcuts in the interface where possible.
+    3.3.2. Add comments in the script to describe the specific modifications made for accessibility.
+
+  3.4 INPUT FIELDS AND VARIABLES
+
+    3.4.1  Variable: "userid"
+      3.4.1.1 currently logged-in user.
+      3.4.1.2  Use a function that is applicable cross-platform (MacOS and Windows at a minimum).
+      3.4.1.3. Do not display the userid.
+
+    3.4.2 Input field: "project"  
+      3.4.2.1 This is a dropdown field based on the "project" dictionary.
+      3.4.2.2 Create a label
+
+    3.4.3 Input field: "PE"  
+      3.4.3.1 Display and label "PE" information from the "project" dictionary based on the value of the "project" input field.
+      3.4.3.2. This field is not editable.
+      3.4.3.2.  Initialize this value to "0000"
+
+    3.4.4 Input field: "task"
+      3.4.4.1 This is a dropdown field based on "task" elements of the selected "project" in the "project" dictionary.  
+      3.4.4.2 EN/FR translations for "task" dropdown items are found in the "task" dictionary.
+      3.4.4.3 Create a label
+      3.4.4.4. Reset the value of "task" when the value of "project" is changed.
+
+    3.4.5 Input field: "user_entered_identifer"
+      3.4.5.1  User-entered data
+      3.4.5.2 Default value is ""
+      3.4.5.3 The default label is "Identifier"
+      3.4.5.4 Update the label text with the "identifier" field for the selected "project" in the "project" dictionary each time the "project" GUI variable is updated.
+
+    3.4.6 Input field: "timer"
+      3.4.6.1 Please display the elapsed time tracking in format HH:MM:SS when the Start/Stop toggle is toggled on.  
+      3.4.6.2. This field is not editable.
+      3.4.6.3 Create a placeholder in the GUI definition so that the GUI is the correct size at startup
+      3.4.6.4. Initialize this value to. "00:00:00"
+
+    3.4.7 calculated field: "unique_identifier" enables a unique output file name to be created later 
+      3.4.7.1  unique_identifier is a randomly created unique identifier that could be created by the uuid function
+      3.4.7.2 length = 16 characters
+
+  3.5 BUTTONS
+    3.5.1 Toggle Button: "Start/Stop".
+      3.5.1.1 Toggle on = display "Start", foreground green.  Toggle off = display "Stop", foreground red
+      3.5.1.2 Translate according to the currently selected interface language
+      3.5.1.3  Appearance: the shape of this button is round like a VCR record button.
+      3.5.1.4 Assign keyboard shortcut: "CTRL-T" to this toggle button.
+      3.5.1.5 "project" and "task" fields cannot be blank when the "Start/Stop" button is toggled on.
+      3.5.1.6  GUI values cannot be changed once the "Start/Stop" button is toggled on.
+      3.5.1.7 Action: Time tracking Initiated by user pressing the "Start/Stop" toggle button.  
+      3.5.1.8 Action: When the button is toggled to "Stop", output a comma-delimited file with a single record in format "output_format"  Use the EN version of all variables when returning data for consistency of output.  Display a info message when the file is written.
+      3.5.1.9 Test whether file output_folder is valid at startup so that the output function does not fail after completing a timing activity.  Display an error message and exist if the output_folder is not valid.  Output folder "" is valid, and must deposit the output file in the same folder as the source script.
+
+4. INPUT PARAMETERS:
+  4.1 programming language = python
+  4.2 output_folder= "/Users/{userid}/Documents"
+  4.3 output_filename = "userid"."unique_identifier".csv
+  4.5 output_filetype = ".csv"
+  4.6 output_format = userid, datetime_start, datetime_end, project, user_entered_identifier, task, PE
+
+5. CUSTOMIZABLE INPUT DICTIONARIES IN JSON FORMAT.  
+  5.1 These will be available to the script in a file called "input_parameters.json" 
+  5.2 For reference, the structure and content of the input parameters is as follows:
+
+{
+    "tasks": {
+        "NRFU": {
+            "EN": "NRFU",
+            "FR": "NRFU",
+            "Desc_EN": "Non-Response Follow-Up",
+            "Desc_FR": "Suivi des non-réponses"
+        },
+        "CATI": {
+            "EN": "CATI",
+            "FR": "CATI",
+            "Desc_EN": "Computer-Assisted Telephone Interviewing",
+            "Desc_FR": "Entrevue téléphonique assistée par ordinateur"
+        },
+        "FEFU": {
+            "EN": "FEFU",
+            "FR": "FEFU",
+            "Desc_EN": "Field Enumeration Follow-Up",
+            "Desc_FR": "Suivi des enquêtes sur le terrain"
+        },
+        "Capture": {
+            "EN": "Capture",
+            "FR": "Capture",
+            "Desc_EN": "Data Capture",
+            "Desc_FR": "Capture de données"
+        },
+        "Training": {
+            "EN": "Training",
+            "FR": "Formation",
+            "Desc_EN": "Training Sessions",
+            "Desc_FR": "Séances de formation"
+        },
+        "Other": {
+            "EN": "Other",
+            "FR": "Autre",
+            "Desc_EN": "Other Tasks",
+            "Desc_FR": "Autres tâches"
+        },
+        "KQI": {
+            "EN": "KQI",
+            "FR": "ICQ",
+            "Desc_EN": "Key Quality Indicators",
+            "Desc_FR": "Indicateurs clés de qualité"
+        },
+        "Listing": {
+            "EN": "Listing",
+            "FR": "Listage",
+            "Desc_EN": "Listing Tasks",
+            "Desc_FR": "Tâches de listage"
+        },
+        "QC": {
+            "EN": "QC",
+            "FR": "CdeQ",
+            "Desc_EN": "Quality Control",
+            "Desc_FR": "Contrôle de la qualité"
+        },
+        "task9": {
+            "EN": "task9",
+            "FR": "tache9",
+            "Desc_EN": "Task 9",
+            "Desc_FR": "Tâche 9"
+        },
+        "task10": {
+            "EN": "task10",
+            "FR": "tache10",
+            "Desc_EN": "Task 10",
+            "Desc_FR": "Tâche 10"
+        },
+        "task11": {
+            "EN": "task11",
+            "FR": "tache11",
+            "Desc_EN": "Task 11",
+            "Desc_FR": "Tâche 11"
+        },
+        "task12": {
+            "EN": "task12",
+            "FR": "tache12",
+            "Desc_EN": "Task 12",
+            "Desc_FR": "Tâche 12"
+        }
+    },
+    "projects": {
+        "GFS": {
+            "EN": "GFS",
+            "FR": "FGS",
+            "PE": 1000,
+            "identifier": "QUID",
+            "Desc_EN": "Project GFS description",
+            "Desc_FR": "Description du projet FGS",
+            "tasks": ["NRFU", "CATI", "FEFU", "Capture", "Training", "Other"]
+        },
+        "IGG": {
+            "EN": "IGG",
+            "FR": "IGG",
+            "PE": 1000,
+            "identifier": "QUID",
+            "Desc_EN": "Project IGG description",
+            "Desc_FR": "Description du projet IGG",
+            "tasks": ["NRFU", "CATI", "FEFU", "Capture", "Training", "Other"]
+        },
+        "Office Listing": {
+            "EN": "Office Listing",
+            "FR": "Listage au bureau",
+            "PE": 2000,
+            "identifier": "BLOCKID",
+            "Desc_EN": "Office Listing project description",
+            "Desc_FR": "Description du projet de listage de bureau",
+            "tasks": ["KQI", "Listing", "QC", "Training"]
+        },
+        "myproject4": {
+            "EN": "myproject4",
+            "FR": "myproject4",
+            "PE": 3000,
+            "identifier": "SSID",
+            "Desc_EN": "Project myproject4 description",
+            "Desc_FR": "Description du projet myproject4",
+            "tasks": ["task9", "task10", "task11", "task12"]
+        }
+    }
+}
+
+--------------------------
+# timecode_ui.py - User interface to allow users to record time against specific projects and activities.
+
+import tkinter as tk
+from tkinter import ttk, messagebox
+import getpass
+import uuid
+from datetime import datetime, timedelta
+import json
+import os
+import csv
+
+"""
+Change Log:
+Version 1.0 - Initial version with basic functionality
+Version 1.1 - Added dynamic project/task dropdowns
+Version 1.2 - Introduced bilingual interface
+Version 1.3 - Accessibility features added
+Version 1.4 - Timer functionality improved
+Version 1.5 - Fixed dynamic "PE" value display
+Version 1.6 - Ensured "EN" output consistency
+Version 1.7 - Corrected language toggle behavior
+Version 1.8 - Added version tracking comment block
+Version 1.9 - Fixed identifier label & timer updates
+Version 2.0 - Output file now uses "EN" values
+"""
+
+def get_current_user_id():
+    """Retrieve the currently logged-in user, cross-platform."""
+    return getpass.getuser()
+
+def load_input_parameters(file_path="input_parameters.json"):
+    """Load tasks and projects from a JSON file."""
+    with open(file_path, "r") as file:
+        data = json.load(file)
+    return data
+
+class ProjectCoderApp(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.data = load_input_parameters()
+        self.userid = get_current_user_id()
+        self.current_language = "EN"  # Default language
+        self.timer_start = None
+        self.timer_running = False
+        self.unique_identifier = uuid.uuid4().hex[:16]
+        self.selected_project_PE = "0000"  # Default PE value
+        self.initialize_ui()
+        self.toggle_language(initial=True)
+
+    def initialize_ui(self):
+        self.title("Project Coder")
+        self.geometry("")  # Auto-size
+        self.resizable(True, True)
+        self.attributes("-topmost", True)
+        
+        # Project Dropdown
+        self.project_label = ttk.Label(self, text="")
+        self.project_label.pack(side=tk.LEFT)
+        self.project_var = tk.StringVar()
+        self.project_dropdown = ttk.Combobox(self, textvariable=self.project_var, state="readonly")
+        self.project_dropdown.pack(side=tk.LEFT)
+        self.project_dropdown.bind("<<ComboboxSelected>>", self.on_project_change)
+
+        # Task Dropdown
+        self.task_label = ttk.Label(self, text="")
+        self.task_label.pack(side=tk.LEFT)
+        self.task_var = tk.StringVar()
+        self.task_dropdown = ttk.Combobox(self, textvariable=self.task_var, state="readonly")
+        self.task_dropdown.pack(side=tk.LEFT)
+
+        # User Entered Identifier
+        self.user_identifier_label = ttk.Label(self, text="Identifier")
+        self.user_identifier_label.pack(side=tk.LEFT)
+        self.user_identifier_entry = ttk.Entry(self)
+        self.user_identifier_entry.pack(side=tk.LEFT)
+
+        # Timer Display
+        self.timer_display = ttk.Label(self, text="00:00:00")
+        self.timer_display.pack(side=tk.LEFT)
+
+        # Start/Stop Button
+        self.start_stop_button = ttk.Button(self, text="Start", command=self.toggle_timer)
+        self.start_stop_button.pack(side=tk.LEFT, padx=5)
+
+        # Language Toggle Button
+        self.language_button = ttk.Button(self, text="", command=lambda: self.toggle_language(initial=False))
+        self.language_button.pack(side=tk.RIGHT, padx=5)
+
+        # Styling for Start/Stop Button
+        self.style = ttk.Style(self)
+        self.style.configure("Start.TButton", foreground="green", font=('Helvetica', 12))
+        self.style.configure("Stop.TButton", foreground="red", font=('Helvetica', 12))
+
+    def populate_dropdowns(self):
+        project_names = [info[self.current_language] for info in self.data["projects"].values()]
+        self.project_dropdown['values'] = project_names
+        self.project_dropdown.set('')  # Clear project dropdown initially
+        self.task_dropdown.set('')  # Clear task dropdown initially
+
+    def on_project_change(self, event=None):
+        project_key = list(self.data["projects"].keys())[self.project_dropdown.current()]
+        selected_project = self.data["projects"][project_key]
+        tasks_for_project = selected_project["tasks"]
+        self.task_dropdown['values'] = [self.data["tasks"][task][self.current_language] for task in tasks_for_project]
+
+        self.selected_project_PE = selected_project["PE"]  # Update PE value for the selected project
+        self.user_identifier_entry.delete(0, tk.END)  # Clear the identifier entry field
+
+    def toggle_language(self, initial):
+        if self.timer_running and not initial:
+            messagebox.showwarning("Warning", "Cannot change language while timer is running.")
+            return
+        if not initial:
+            self.current_language = "FR" if self.current_language == "EN" else "EN"
+        self.update_ui_texts()
+        self.populate_dropdowns()
+
+    def update_ui_texts(self):
+        translations = {
+            "EN": {"project": "Project", "task": "Task", "start": "Start", "stop": "Stop", "language_toggle": "FR", "identifier": "Identifier"},
+            "FR": {"project": "Projet", "task": "Tâche", "start": "Démarrer", "stop": "Arrêter", "language_toggle": "EN", "identifier": "Identifiant"}
+        }
+        lang = translations[self.current_language]
+        self.project_label.config(text=lang["project"])
+        self.task_label.config(text=lang["task"])
+        self.user_identifier_label.config(text=lang["identifier"])
+        self.start_stop_button.config(text=lang["start"] if not self.timer_running else lang["stop"])
+        self.language_button.config(text=lang["language_toggle"])
+        self.user_identifier_entry.delete(0, tk.END)  # Clear the identifier entry field on language toggle
+
+    def toggle_timer(self):
+        if not self.project_dropdown.get() or not self.task_dropdown.get():
+            messagebox.showerror("Error", "Both project and task must be selected.")
+            return
+        self.timer_running = not self.timer_running
+        if self.timer_running:
+            self.timer_start = datetime.now()
+            self.start_stop_button.config(text="Stop", style="Stop.TButton")
+            self.update_timer()
+        else:
+            self.output_time_record()
+            self.start_stop_button.config(text="Start", style="Start.TButton")
+            self.timer_start = None  # Reset timer start
+
+    def update_timer(self):
+        """Update the timer display while the timer is running."""
+        if self.timer_running:
+            elapsed_time = datetime.now() - self.timer_start
+            self.timer_display.config(text=str(elapsed_time).split('.')[0])  # Update display without microseconds
+            self.after(1000, self.update_timer)  # Schedule next update
+
+    def output_time_record(self):
+        output_folder = f"/Users/{self.userid}/Documents"
+        if not os.path.exists(output_folder):
+            os.makedirs(output_folder)  # Ensure the directory exists
+        output_filename = f"{self.userid}.{self.unique_identifier}.csv"
+        output_path = os.path.join(output_folder, output_filename)
+        datetime_format = "%Y-%m-%d %H:%M:%S"
+        datetime_start = self.timer_start.strftime(datetime_format)
+        datetime_end = datetime.now().strftime(datetime_format)
+        
+        # Fetch English versions for project and task
+        selected_project_index = self.project_dropdown.current()
+        selected_project_key = list(self.data["projects"].keys())[selected_project_index]
+        project_en = self.data["projects"][selected_project_key]["EN"]  # English name of the project
+        
+        selected_task = self.task_var.get()
+        task_en = None
+        for task_key, task_value in self.data["tasks"].items():
+            if task_value[self.current_language] == selected_task:
+                task_en = task_value["EN"]  # English name of the task
+                break
+
+        user_entered_identifier = self.user_identifier_entry.get()
+        pe = self.selected_project_PE  # PE value for the selected project
+
+        with open(output_path, 'w', newline='', encoding='utf-8') as csvfile:
+            fieldnames = ['userid', 'datetime_start', 'datetime_end', 'project', 'user_entered_identifier', 'task', 'PE']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerow({
+                'userid': self.userid,
+                'datetime_start': datetime_start,
+                'datetime_end': datetime_end,
+                'project': project_en,  # Use English version
+                'user_entered_identifier': user_entered_identifier,
+                'task': task_en,  # Use English version
+                'PE': pe
+            })
+
+        messagebox.showinfo("Success", f"Time record saved to {output_path}.")
+
+
+if __name__ == "__main__":
+    app = ProjectCoderApp()
+    app.mainloop()
+    

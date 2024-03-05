@@ -1,0 +1,32 @@
+# timecode_watcher.specs - Definition file for watcher script
+
+1. OBJECTIVE 
+  1.1. Please write a script which watches a specific folder for new files received and updates a database with the new information contained.
+
+2. ADMINISTRATION
+  2.1 Rows in this file that begin with "#" should be ignored.
+  2.2 Include the following text as the first line of the file "# watcher.py - A watcher script to import time coding records to a database. \n" 
+  2.3 Include a changelog comment block listing the changes made for each regeneration of the script
+  2.4 All numbered items are mandatory requirements
+  2.5 Track version numbers for this script.  Increment the version number each time this script is regenerated in the ChatGPT thread.   The base version number is 1.0
+  2.6 Comment the code liberally
+  2.7. Use generally accepted practices for python coding
+
+3.  USER INTERFACE
+  3.1. There is no GUI
+
+4. INPUT PARAMETERS:
+  4.1 programming language = python
+  4.2 input_folder= "/Users/{userid}/Documents"
+  4.3 input_filename = "userid"."unique_identifier".csv
+  4.5 output_filetype = ".csv"
+  4.6 input_format = userid, datetime_start, datetime_end, project, user_entered_identifier, task, PE
+  4.7 output data:  an SQLITE database file called "timecode".  When the program starts, it must check that this database exists.  If it does not exist, it creates the file and adds a table called "timecode" with fieldnames to match "input_format"
+
+5. FUNCTIONS
+  5.1 watcher
+    5.1.1 This function will run continuously and watch "input_folder" for new .csv files.  When a new .csv file appears, read each record in the file and upload the fields in format "input_format" to the database at "output_data".  After the data is extracted, move the input_filename to a subfolder called "ARCHIVE".
+  5.2 get_userid
+    5.2.1 a cross-platform function to determine the userid 
+
+  

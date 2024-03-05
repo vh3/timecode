@@ -1,0 +1,34 @@
+# timecode_report.specs - script to define the report script.
+
+Simple Report
+
+1. OBJECTIVE 
+  1.1. Please write a script which produces a simple summary report from an SQLite database which contains only a single table.
+
+2. ADMINISTRATION
+  2.1 Rows in this file that begin with "#" should be ignored.
+  2.2 Include the following text as the first line of the file "# simple_report.py - A script to produce a simple SQL summary report from an SQLite database. \n" 
+  2.3 Include a changelog comment block listing the changes made for each regeneration of the script
+  2.4 All numbered items are mandatory requirements
+  2.5 Track version numbers for this script.  Increment the version number each time this script is regenerated in the ChatGPT thread.   The base version number is 1.0
+  2.6 Comment the code liberally
+  2.7. Use generally accepted practices for python coding
+
+3.  USER INTERFACE
+  3.1. There is no GUI
+
+4. INPUT PARAMETERS:
+  4.1 programming language = python
+  4.2 input_folder= "/Users/{userid}/Documents"
+  4.3 db_name = "timecode.sqlite"
+  4.4 table_name = "timecode"
+  4.5 output_filename "timecode_report.csv"
+  4.6 input_format = userid, datetime_start, datetime_end, project, user_entered_identifier, task, Code
+
+5. FUNCTIONS
+  5.1 generate_report
+    5.1.1 Create a summary table in the file "output_filename" summarizing by "project" and task type the duration in minutes (rounded to 1 decimal place) for each task.  Also calculate the average time per unit (TPU) for each task.
+    5.1.2 Final row of the file should list the total number of tasks logged, average time per unit and total minutes recorded lined up with the correct columns.
+5.2 get_userid
+  5.2.1 Use a cross-platform function to determine the currently logged-in "userid".
+
